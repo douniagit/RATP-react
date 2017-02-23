@@ -1,7 +1,7 @@
 import React from 'react';
 import Request from "superagent";
 
-class ApiCall extends React.Component {
+class RerApiCall extends React.Component {
 
 	constructor(props) {
 	    super(props);
@@ -17,7 +17,7 @@ class ApiCall extends React.Component {
 
 	 callingApi(){
 		// const url=`https://api-ratp.pierre-grimaud.fr/v2/${this.state.typeLine}/${this.state.numberLine}/stations?format=json`;
-    const url="https://api-ratp.pierre-grimaud.fr/v2/metros/9/stations/republique?destination=mairie+de+montreuil";
+    const url="https://api-ratp.pierre-grimaud.fr/v2/rers/B/stations/denfert+rochereau?destination=robinson+saint+remy+les+chevreuse&endingstation=arcueil+cachan";
     Request.get(url).then((data)=>{
 		 // console.log(JSON.parse(data.text));
 			const ratp=JSON.parse(data.text);
@@ -64,12 +64,10 @@ stationName(){
     return (
       <div >
         {situation}
-      <input type="text" value={this.state.typeLine} onChange={this.handleChange} />
-      <input type="text" value={this.state.numberLine} onChange={this.handleChange} />
       </div>
 
     );
   }
 }
 
-export default ApiCall;
+export default RerApiCall;
