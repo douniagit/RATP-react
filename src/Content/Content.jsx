@@ -1,6 +1,6 @@
 import React from 'react';
 import "./content.css";
-
+import ApiCall from "./../ApiCall/ApiCall.jsx";
 class Content extends React.Component {
 
 	
@@ -14,7 +14,10 @@ class Content extends React.Component {
           </div>
       <div className="content">
         <div className="container">
-          <h1> Choppes Ton Train</h1>
+        <h1> Choppes Ton Train</h1>
+        <br/>
+        <ApiCall/>
+          
         </div>
       </div>
       </div>
