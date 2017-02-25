@@ -37,7 +37,7 @@ class RerApiCall extends React.Component {
  // this.handleChange();
 	this.callingApi();
 	this.refresh = setInterval(
-      ()=>this.callingApi(), 10000);
+      ()=>this.callingApi(), 60000);
 }
 
 stationName(){
@@ -58,8 +58,6 @@ stationName(){
             File d attente = {info.message}
             </div>)
           });
-
-
 
     return (
       <div >
