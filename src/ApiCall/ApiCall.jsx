@@ -28,27 +28,29 @@ class ApiCall extends React.Component {
 		 });
 	}
 
-  handleChange(event) {
-   this.setState({metroLine: event.target.defaultValue.substr(0,2)})
-  }
+  // handleChange(event) {
+  //  this.setState({metroLine: event.target.value})
+  // console.log(this.state.metroLine);
+  // }
+
 
 	componentDidMount(){
-  this.handleChange();
+  //this.handleChange();
 	this.callingApi();
 	this.refresh = setInterval(
-      ()=>this.callingApi(), 60000);
+      ()=>this.callingApi(), 10000);
   }
 
   stationName(){
          return this.state.stations.map((info, i) =>{
             return (<div>
-              stationActuelle = {info.name}
+              station Actuelle = {info.name}
               </div>)
             });
           }
 
   lineName(){
-         return this.state.line.map((info, i) =>{
+        return this.state.line.map((info, i) =>{
             return (<div>
               metro = {info.line}
               </div>)
@@ -57,19 +59,10 @@ class ApiCall extends React.Component {
 
   render() {
 
-//     let filterLines=this.state.metroLine.filter((ligne) => {
-//       return ligne.line.toLowerCase().indexOf(this.state.metroLine.toLowerCase()) !==1;
-//     }
-
-// );
-// console.log(filterLines);
-
 	  	const getInfo = this.state.time;
 	  	const situation = getInfo.map((info, i) =>{
-	  		console.log(info);
-	        return (<div>
-            {this.lineName()}
-            {this.stationName()}
+	  	//console.log(info);
+          return (<div>
             direction = {info.destination}
             <br/>
             temps d attente = {info.message}
@@ -78,12 +71,15 @@ class ApiCall extends React.Component {
 
     return (
       <div>
-        <input type="text" defaultValue={this.state.metroLine} onChange={this.handleChange.bind(this)} placeholder="ligne de metro numero..."/>
+        {/*<input type="text" value={this.state.metroLine} onChange={this.handleChange.bind(this)} placeholder="ligne de metro numero..."/>
         <input type="text" defaultValue={this.state.terminus} onChange={this.handleChange.bind(this)} placeholder="direction..."/>
+          */}<br/>
           <br/>
-          <br/>
+          {this.lineName()}
+          {this.stationName()}
           {situation}
         </div>
+
     );
   }
 }
