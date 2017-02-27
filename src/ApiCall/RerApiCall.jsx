@@ -6,18 +6,21 @@ class RerApiCall extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-        typeLine:"",
-        numberLine:"",
+        rerLine:"",
+        position:"",
+        terminus:"",
         stations:[],
+        // line:[],
         time:[]
 	    }
 	    this.callingApi();
-      this.stationName();
 	  }
 
 	 callingApi(){
-		// const url=`https://api-ratp.pierre-grimaud.fr/v2/${this.state.typeLine}/${this.state.numberLine}/stations?format=json`;
-    const url="https://api-ratp.pierre-grimaud.fr/v2/rers/B/stations/denfert+rochereau?destination=robinson+saint+remy+les+chevreuse&endingstation=arcueil+cachan";
+		const url=`https://api-ratp.pierre-grimaud.fr/v2/rers/${this.state.rerLine}/stations/${this.state.position}?destination=${this.state.terminus}`;
+    //const url="https://api-ratp.pierre-grimaud.fr/v2/rers/B/stations/denfert+rochereau?destination=robinson+saint+remy+les+chevreuse&endingstation=arcueil+cachan";
+    //const url="https://api-ratp.pierre-grimaud.fr/v2/rers/B/stations/denfert+rochereau?destination=robinson+saint+remy+les+chevreuse"; ca fonctionne dans renseigner l'arret
+
     Request.get(url).then((data)=>{
 		 // console.log(JSON.parse(data.text));
 			const ratp=JSON.parse(data.text);
@@ -28,32 +31,30 @@ class RerApiCall extends React.Component {
 	}
 
 
-  // handleChange(event) {
-  //   this.setState({typeLine: event.target.value})
-  //   this.setState({numberLine: event.target.value});
-  // }
+  handleChange(key, event) {
+    this.setState({[key]: event.target.value})
+  }
 
 	componentDidMount(){
- // this.handleChange();
-	this.callingApi();
 	this.refresh = setInterval(
-      ()=>this.callingApi(), 60000);
+      ()=>this.callingApi(), 10000);
 }
 
-stationName(){
-       return this.state.stations.map((info, i) =>{
-          return (<div>
-            stationActuelle = {info.name}
-            </div>)
-          });
-        }
+// stationName(){
+//        return this.state.stations.map((info, i) =>{
+//           return (<div>
+//             stationActuelle = {info.name}
+//             </div>)
+//           });
+//         }
 
   render() {
 	  	const getInfo = this.state.time;
-	  	const situation = getInfo.map((info, i) =>{
-	  		console.log(info);
+	  	const situation2 = getInfo.map((info, i) =>{
+	  		//console.log(info);
 	        return (<div>
-            {this.stationName()}
+            RER = {this.state.rerLine} <br/>
+            position ={this.state.position} <br/>
             direction = {info.destination}
             File d attente = {info.message}
             </div>)
@@ -63,7 +64,11 @@ stationName(){
 
     return (
       <div >
-        {situation}
+        <input type="text" value={this.state.rerLine} onChange={this.handleChange.bind(this,'rerLine')} placeholder="ligne de rer..."/>
+        <input type="text" value={this.state.position} onChange={this.handleChange.bind(this,'position')} placeholder="la station la plus proche..."/> 
+        <input type="text" value={this.state.terminus} onChange={this.handleChange.bind(this, 'terminus')} placeholder="direction..."/>
+          
+        {situation2}
       </div>
 
     );

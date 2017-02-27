@@ -7,7 +7,7 @@ class ApiCall extends React.Component {
 	    super(props);
 	    this.state = {
           metroLine:"",
-          position:"croix+de+chavaux",
+          position:"",
           terminus:"",
           stations:[],
           line:[],
@@ -35,27 +35,25 @@ class ApiCall extends React.Component {
 
 
 	componentDidMount(){
-  //this.handleChange();
-	this.callingApi();
 	this.refresh = setInterval(
       ()=>this.callingApi(), 10000);
   }
 
-  stationName(){
-         return this.state.stations.map((info, i) =>{
-            return (<div>
-              station Actuelle = {info.name}
-              </div>)
-            });
-          }
+  // stationName(){
+  //        return this.state.stations.map((info, i) =>{
+  //           return (<div>
+  //             station Actuelle = {info.name}
+  //             </div>)
+  //           });
+  //         }
 
-  lineName(){
-        return this.state.line.map((info, i) =>{
-            return (<div>
-              metro = {info.line}
-              </div>)
-            });
-          }
+  // lineName(){
+  //       return this.state.line.map((info, i) =>{
+  //           return (<div>
+  //             metro = {info.line}
+  //             </div>)
+  //           });
+  //         }
 
   render() {
 
@@ -63,23 +61,25 @@ class ApiCall extends React.Component {
 	  	const situation = getInfo.map((info, i) =>{
 	  	//console.log(info);
           return (<div>
-            direction = {info.destination}
+            <br/>
+            metro = {this.state.metroLine} <br/>
+            position ={this.state.position} <br/>
+            direction = {info.destination} <br/>
             <br/>
             temps d attente = {info.message}
+            <br/>
             </div>)
           });
 
     return (
       <div>
         <input type="text" value={this.state.metroLine} onChange={this.handleChange.bind(this,'metroLine')} placeholder="ligne de metro numero..."/>
-          
+        <input type="text" value={this.state.position} onChange={this.handleChange.bind(this,'position')} placeholder="la station la plus proche..."/> 
         <input type="text" value={this.state.terminus} onChange={this.handleChange.bind(this, 'terminus')} placeholder="direction..."/>
           
 
           <br/>
           <br/>
-          {this.lineName()}
-          {this.stationName()}
           {situation}
         </div>
 
