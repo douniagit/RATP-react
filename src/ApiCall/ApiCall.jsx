@@ -6,9 +6,9 @@ class ApiCall extends React.Component {
 	constructor(props) {
 	    super(props);
 	    this.state = {
-          metroLine:"9",
+          metroLine:"",
           position:"croix+de+chavaux",
-          terminus:"mairie+de+montreuil" && "pont+de+sevres",
+          terminus:"",
           stations:[],
           line:[],
           time:[]
@@ -28,10 +28,10 @@ class ApiCall extends React.Component {
 		 });
 	}
 
-  // handleChange(event) {
-  //  this.setState({metroLine: event.target.value})
-  // console.log(this.state.metroLine);
-  // }
+  handleChange(key, event ) {
+    console.log(key)
+   this.setState({[key]: event.target.value})
+  }
 
 
 	componentDidMount(){
@@ -71,9 +71,12 @@ class ApiCall extends React.Component {
 
     return (
       <div>
-        {/*<input type="text" value={this.state.metroLine} onChange={this.handleChange.bind(this)} placeholder="ligne de metro numero..."/>
-        <input type="text" defaultValue={this.state.terminus} onChange={this.handleChange.bind(this)} placeholder="direction..."/>
-          */}<br/>
+        <input type="text" value={this.state.metroLine} onChange={this.handleChange.bind(this,'metroLine')} placeholder="ligne de metro numero..."/>
+          
+        <input type="text" value={this.state.terminus} onChange={this.handleChange.bind(this, 'terminus')} placeholder="direction..."/>
+          
+
+          <br/>
           <br/>
           {this.lineName()}
           {this.stationName()}
