@@ -1,8 +1,9 @@
 import React from 'react';
 import "./content.css";
-import ApiCall from "./../ApiCall/ApiCall.jsx";
+import RerApiCall from "./../ApiCall/RerApiCall.jsx";
+import {Router, Route, Link } from 'react-router';
 
-class Content extends React.Component {
+class Content2 extends React.Component {
 
 	
   render() {
@@ -18,7 +19,7 @@ class Content extends React.Component {
               <h1> Choppes Ton Train</h1>
               <br/>
             <div className="cadrant" style={{width:"500px", height:" 280px", overflow:"hidden"}}>
-            <ApiCall/>
+            <RerApiCall />
             </div>
         </div>
           </div>
@@ -27,4 +28,4 @@ class Content extends React.Component {
   }
 }
 
-export default Content;
+export default Content2;

@@ -32,12 +32,12 @@ class RerApiCall extends React.Component {
 
 
   handleChange(key, event) {
-    this.setState({[key]: event.target.value})
+    this.setState({[key]: event.target.value.substring(0,50)})
   }
 
 	componentDidMount(){
 	this.refresh = setInterval(
-      ()=>this.callingApi(), 10000);
+      ()=>this.callingApi(), 1000);
 }
 
 // stationName(){

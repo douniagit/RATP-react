@@ -30,7 +30,7 @@ class ApiCall extends React.Component {
 
   handleChange(key, event ) {
     console.log(key)
-   this.setState({[key]: event.target.value})
+   this.setState({[key]: event.target.value.substring(0,30)})
   }
 
 
@@ -65,8 +65,7 @@ class ApiCall extends React.Component {
             metro = {this.state.metroLine} <br/>
             position ={this.state.position} <br/>
             direction = {info.destination} <br/>
-            <br/>
-            temps d attente = {info.message}
+           <div style={{color:"red"}}> temps d attente = {info.message}</div>
             <br/>
             </div>)
           });
@@ -76,8 +75,6 @@ class ApiCall extends React.Component {
         <input type="text" value={this.state.metroLine} onChange={this.handleChange.bind(this,'metroLine')} placeholder="ligne de metro numero..."/>
         <input type="text" value={this.state.position} onChange={this.handleChange.bind(this,'position')} placeholder="la station la plus proche..."/> 
         <input type="text" value={this.state.terminus} onChange={this.handleChange.bind(this, 'terminus')} placeholder="direction..."/>
-          
-
           <br/>
           <br/>
           {situation}
